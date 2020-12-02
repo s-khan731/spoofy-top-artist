@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -15,6 +16,10 @@ import { BaseService } from './base.service';
     RouterModule.forRoot([
       { path: '', component: ArtistListComponent },
     ])
+  ,
+  HttpClientModule,
+        
+
   ],
   declarations: [
     AppComponent,
@@ -23,7 +28,8 @@ import { BaseService } from './base.service';
   ],
   bootstrap: [ AppComponent ],
   providers: [
-   BaseService
+   BaseService,
+   HttpClient
   ]
 })
 export class AppModule { }

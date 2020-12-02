@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { OnInit } from "@angular/core";
 import { ArtistListService } from "./artist-list.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: "artist-list",
@@ -8,17 +9,44 @@ import { ArtistListService } from "./artist-list.service";
   styleUrls: ["./artist-list.component.css"]
 })
 export class ArtistListComponent implements OnInit {
-  constructor(public artistService: ArtistListService) {
-
-  }
+  code = '';
+  artists = [];
+  constructor(public artistService: ArtistListService, private activatedRoute: ActivatedRoute) {
+  this.activatedRoute.queryParams.subscribe(params => {
+    if (!!params['code'] && !this.artistService.accessToken && !this.artistService.refreshToken) {
+        this.code = params['code'];
+        console.log(this.code); 
+        this.artistService.getTokens(this.code).subscribe(
+          result => {
+            if (!!result) {
+              this.artistService.accessToken = result.access_token;
+              this.artistService.tokenType = result.token_type;
+              console.log('retrieved access & refresh tokens');
+            }
+          },
+          error => {
+            console.error('error retrieving access token');
+        });
+        
+    }
+  });
+}
 
   ngOnInit() {
-    this.artistService.logIn();
+    
   }
 
-  // share() {
-  //   window.alert('The product has been shared!');
-  // }
+  retrieveArtists() {
+    this.artistService.retrieveArtists().subscribe(
+      result => {
+        this.artists = result.items;
+      },
+      error => {
+
+      }
+    )
+  }
+
 }
 
 /*
