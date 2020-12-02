@@ -28,6 +28,10 @@
 .retrieve-button {
   margin-top: 15px;
 }
+
+.checkbox-label {
+  display: inline;
+}
 /*
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

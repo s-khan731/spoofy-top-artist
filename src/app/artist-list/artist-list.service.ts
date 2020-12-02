@@ -16,6 +16,7 @@ export class ArtistListService {
   redirectUri = "https://spoofy-top-artist.stackblitz.io";
   tokenType = "";
   offset = 0;
+  timeRange = 'medium_term';
 
   public getTokens(code: string): any {
     const path = "https://accounts.spotify.com/api/token?" +
@@ -27,14 +28,14 @@ export class ArtistListService {
   }
 
   public retrieveArtists(): any {
-    const path = "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term&offset=" + this.offset;
+    const path = "https://api.spotify.com/v1/me/top/artists?limit=50&time_range=" + this.timeRange + "&offset=" + this.offset;
     let header = new HttpHeaders();
     header = header.append('Authorization', this.tokenType + ' ' + this.accessToken);
     return this.http.get(path, {headers: header});
   }
 
   public retrieveSongs(): any {
-    const path = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term&offset=" + this.offset;
+    const path = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=" + this.timeRange + "&offset=" + this.offset;
     let header = new HttpHeaders();
     header = header.append('Authorization', this.tokenType + ' ' + this.accessToken);
     return this.http.get(path, {headers: header});

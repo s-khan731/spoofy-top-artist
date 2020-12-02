@@ -12,6 +12,7 @@ export class ArtistListComponent implements OnInit {
   code = '';
   artists = [];
   songs = [];
+  showDataForAllTime = false;
   constructor(public artistService: ArtistListService, private activatedRoute: ActivatedRoute) {
   this.activatedRoute.queryParams.subscribe(params => {
     if (!!params['code'] && !this.artistService.accessToken && !this.artistService.refreshToken) {
@@ -56,6 +57,15 @@ export class ArtistListComponent implements OnInit {
         console.log('error retrieving artist data')
       }
     )
+  }
+
+  toggleView() {
+    if (this.showDataForAllTime) {
+      this.artistService.timeRange = 'medium_term';
+    } else 
+      this.artistService.timeRange = 'long_term';
+    this.showDataForAllTime = !this.showDataForAllTime;
+    this.retrieveData();
   }
 
 }
