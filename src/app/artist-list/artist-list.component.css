@@ -4,10 +4,11 @@
 
 .artist-name {
   font-size: 20px;
+  margin-bottom: 2px;
 }
 
 .genre {
-  
+  margin-left: 25px;
 }
 /*
 Copyright Google LLC. All Rights Reserved.

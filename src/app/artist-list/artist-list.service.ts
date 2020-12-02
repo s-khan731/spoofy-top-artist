@@ -26,7 +26,7 @@ export class ArtistListService {
   }
 
   public retrieveArtists(): any {
-    const path = "https://api.spotify.com/v1/me/top/artists?limit=50";
+    const path = "https://api.spotify.com/v1/me/top/artists?limit=100";
     let header = new HttpHeaders();
     header = header.append('Authorization', this.tokenType + ' ' + this.accessToken);
     return this.http.get(path, {headers: header});

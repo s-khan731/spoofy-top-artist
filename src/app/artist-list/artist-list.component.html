@@ -1,5 +1,5 @@
 <br>
-<div *ngIf="!this.artistService.accessToken"> <a href="https://accounts.spotify.com/authorize?client_id=af93ffba55fe40c39a8dc77f025c17c9&response_type=code&redirect_uri=https://spoofy-top-artist.stackblitz.io&scope=user-top-read user-read-private user-read-email">Login to Spotify</a></div>
+<div *ngIf="!this.artistService.accessToken"> <a href="https://accounts.spotify.com/authorize?client_id=af93ffba55fe40c39a8dc77f025c17c9&response_type=code&redirect_uri=https://spoofy-top-artist.stackblitz.io&scope=user-top-read">Login to Spotify</a></div>
 <br>
 <br>
 
@@ -10,9 +10,9 @@
 </div>
 
 <div>
-  <div class="artist-container" *ngFor="let artist of artists">
-    <div class="artist-name"><b>{{artist.name}}</b></div>
-    <div class="genre" *ngFor="let genre of artist.genres"><span class="glyphicon glyphicon-music"></span>{{genre}}</div>
+  <div class="artist-container" *ngFor="let artist of artists; let i = index">
+    <div class="artist-name"><b>{{i + 1}}. {{artist.name}}</b></div>
+    <div class="genre" *ngFor="let genre of artist.genres"><span>{{genre}}</span></div>
   </div>
 </div>
 
