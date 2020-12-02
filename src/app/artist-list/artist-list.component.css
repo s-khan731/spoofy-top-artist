@@ -10,6 +10,24 @@
 .genre {
   margin-left: 25px;
 }
+
+.container-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.container {
+  flex-direction: column;
+  width: 50%;
+}
+
+.login-button {
+  margin-top: 15px;
+}
+
+.retrieve-button {
+  margin-top: 15px;
+}
 /*
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

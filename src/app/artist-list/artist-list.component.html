@@ -1,20 +1,27 @@
-<br>
-<div *ngIf="!this.artistService.accessToken"> <a href="https://accounts.spotify.com/authorize?client_id=af93ffba55fe40c39a8dc77f025c17c9&response_type=code&redirect_uri=https://spoofy-top-artist.stackblitz.io&scope=user-top-read">Login to Spotify</a></div>
-<br>
-<br>
+<div *ngIf="!this.artistService.accessToken" class="login-button"> <a href="https://accounts.spotify.com/authorize?client_id=af93ffba55fe40c39a8dc77f025c17c9&response_type=code&redirect_uri=https://spoofy-top-artist.stackblitz.io&scope=user-top-read">Login to Spotify</a></div>
 
-<div *ngIf="this.artistService.accessToken">
-  <button (click)="retrieveArtists()">
+<div class="retrieve-button" *ngIf="this.artistService.accessToken && !artists.length">
+  <button (click)="retrieveData()">
     View Artist Breakdown
   </button>
 </div>
 
-<div>
-  <div class="artist-container" *ngFor="let artist of artists; let i = index">
-    <div class="artist-name"><b>{{i + 1}}. {{artist.name}}</b></div>
-    <div class="genre" *ngFor="let genre of artist.genres"><span>{{genre}}</span></div>
+<div *ngIf="artists.length" class="container-row">
+  <div class="container">
+    <div class="artist-container" *ngFor="let artist of artists; let i = index">
+      <div class="artist-name"><b>{{i + 1}}. {{artist.name}}</b></div>
+      <div class="genre" *ngFor="let genre of artist.genres"><span>{{genre}}</span></div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="artist-container" *ngFor="let song of songs; let i = index">
+      <div class="artist-name"><b>{{i + 1}}. {{song.name}}</b></div>
+      <div class="genre"><span>{{song.album.artists[0].name}}</span></div>
+      <div class="genre"><span>{{song.album.name}}</span></div>
+    </div>
   </div>
 </div>
+
 
 <!-- 
 Copyright Google LLC. All Rights Reserved.

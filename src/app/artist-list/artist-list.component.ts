@@ -11,6 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 export class ArtistListComponent implements OnInit {
   code = '';
   artists = [];
+  songs = [];
   constructor(public artistService: ArtistListService, private activatedRoute: ActivatedRoute) {
   this.activatedRoute.queryParams.subscribe(params => {
     if (!!params['code'] && !this.artistService.accessToken && !this.artistService.refreshToken) {
@@ -28,21 +29,31 @@ export class ArtistListComponent implements OnInit {
             console.error('error retrieving access token');
         });
         
-    }
-  });
-}
+      }
+    });
+  }
 
   ngOnInit() {
     
   }
 
-  retrieveArtists() {
+  retrieveData() {
     this.artistService.retrieveArtists().subscribe(
       result => {
         this.artists = result.items;
       },
       error => {
-
+        console.error(error);
+        console.log('error retrieving artist data')
+      }
+    )
+    this.artistService.retrieveSongs().subscribe(
+      result => {
+        this.songs = result.items;
+      },
+      error => {
+        console.error(error);
+        console.log('error retrieving artist data')
       }
     )
   }
