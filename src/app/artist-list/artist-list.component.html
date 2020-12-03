@@ -1,4 +1,4 @@
-<div *ngIf="!this.artistService.accessToken" class="login-button"> <a href="https://accounts.spotify.com/authorize?client_id=af93ffba55fe40c39a8dc77f025c17c9&response_type=code&redirect_uri=https://spoofy-top-artist.stackblitz.io&scope=user-top-read">Login to Spotify</a></div>
+<div *ngIf="!this.artistService.accessToken" class="login-button"> <a href={{logInUrl}}>Log In to Spotify</a></div>
 
 <div class="retrieve-button" *ngIf="this.artistService.accessToken && !artists.length">
   <button (click)="retrieveData()">
@@ -6,12 +6,16 @@
   </button>
 </div>
 
-<div class="toggle" *ngIf="artists.length">
-  <div>
+<div class="toggle-row" *ngIf="artists.length">
+  <div class="checkbox-col">
     <input type="checkbox" id="toggle" name="toggle" [checked]="!showDataForAllTime" (change)="toggleView()">
-    <label class="checkbox-label" for="toggle"><span>Show Data for Last 6 Months</span></label>  
+    <span>Show Data for Last 6 Months</span>
   </div>
-  
+  <div class="container">
+    <button (click)="generatePlaylist()">
+      Generate Playlist from Top Songs
+    </button>
+  </div>
 </div>
 
 <div *ngIf="artists.length" class="container-row">

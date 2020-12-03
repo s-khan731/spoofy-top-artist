@@ -32,6 +32,17 @@
 .checkbox-label {
   display: inline;
 }
+
+.toggle-row {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.checkbox-col {
+  flex-direction: row;
+  width: 50%;
+}
 /*
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

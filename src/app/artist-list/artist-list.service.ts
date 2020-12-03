@@ -20,7 +20,8 @@ export class ArtistListService {
 
   public getTokens(code: string): any {
     const path = "https://accounts.spotify.com/api/token?" +
-      "grant_type=" + this.grantType + "&code=" + code + "&redirect_uri=" + this.redirectUri + "&scope=user-top-read user-read-private user-read-email";
+      "grant_type=" + this.grantType + "&code=" + code + "&redirect_uri=" + this.redirectUri
+       + "&scope=user-top-read user-read-private user-read-email playlist-modify-public playlist-modify-private";
     let header = new HttpHeaders();
     header = header.append('content-type', 'application/x-www-form-urlencoded');
     header = header.append('Authorization', 'Basic ' + btoa(this.clientId + ':' + this.clientSecret));
@@ -35,6 +36,13 @@ export class ArtistListService {
   }
 
   public retrieveSongs(): any {
+    const path = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=" + this.timeRange + "&offset=" + this.offset;
+    let header = new HttpHeaders();
+    header = header.append('Authorization', this.tokenType + ' ' + this.accessToken);
+    return this.http.get(path, {headers: header});
+  }
+
+  public createPlaylist(): any {
     const path = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=" + this.timeRange + "&offset=" + this.offset;
     let header = new HttpHeaders();
     header = header.append('Authorization', this.tokenType + ' ' + this.accessToken);

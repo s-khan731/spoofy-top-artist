@@ -12,6 +12,8 @@ export class ArtistListComponent implements OnInit {
   code = '';
   artists = [];
   songs = [];
+  logInUrl = "https://accounts.spotify.com/authorize?client_id=af93ffba55fe40c39a8dc77f025c17c9&response_type=code&redirect_uri=https://spoofy-top-artist.stackblitz.io" + 
+    "&user-top-read user-read-private user-read-email playlist-modify-public playlist-modify-private";
   showDataForAllTime = false;
   constructor(public artistService: ArtistListService, private activatedRoute: ActivatedRoute) {
   this.activatedRoute.queryParams.subscribe(params => {
@@ -66,6 +68,10 @@ export class ArtistListComponent implements OnInit {
       this.artistService.timeRange = 'long_term';
     this.showDataForAllTime = !this.showDataForAllTime;
     this.retrieveData();
+  }
+
+  generatePlaylist() {
+
   }
 
 }
