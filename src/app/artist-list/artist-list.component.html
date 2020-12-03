@@ -12,7 +12,7 @@
     <span>Show Data for Last 6 Months</span>
   </div>
   <div class="container">
-    <button (click)="generatePlaylist()">
+    <button (click)="generatePlaylist()" [disabled]="generatingPlaylist">
       Generate Playlist from Top Songs
     </button>
   </div>

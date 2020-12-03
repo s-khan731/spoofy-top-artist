@@ -16,6 +16,7 @@ export class ArtistListComponent implements OnInit {
   logInUrl = "https://accounts.spotify.com/authorize?client_id=af93ffba55fe40c39a8dc77f025c17c9&response_type=code&redirect_uri=https://spoofy-top-artist.stackblitz.io" + 
     "&scope=user-top-read user-read-private user-read-email playlist-modify-public playlist-modify-private";
   showDataForAllTime = false;
+  generatingPlaylist = false;
   constructor(public artistService: ArtistListService, private activatedRoute: ActivatedRoute) {
   this.activatedRoute.queryParams.subscribe(params => {
     if (!!params['code'] && !this.artistService.accessToken && !this.artistService.refreshToken) {
@@ -81,6 +82,7 @@ export class ArtistListComponent implements OnInit {
   }
 
   generatePlaylist() {
+    this.generatingPlaylist = true;
     this.artistService.createPlaylist(this.userId).subscribe(
       result => {
         let playlistId = result.id;
@@ -92,16 +94,19 @@ export class ArtistListComponent implements OnInit {
         this.artistService.generatePlaylist(playlistId, songIds).subscribe(
           result => {
             console.log('added songs successfully!');
+            this.generatingPlaylist = false;
           },
           error => {
-                console.error(error);
-                console.log('error adding songs to playlist')
-              }
-            );
+            console.error(error);
+            console.log('error adding songs to playlist')
+            this.generatingPlaylist = false;
+            } 
+          );
       },
       error => {
         console.error(error);
-        console.log('error creating playlist')
+        console.log('error creating playlist');
+        this.generatingPlaylist = false
       }
     );
   }
